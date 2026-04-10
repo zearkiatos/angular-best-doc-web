@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
@@ -7,6 +7,13 @@ import { RouterOutlet } from '@angular/router';
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
-export class App {
+export class App implements OnInit {
+  ngOnInit(): void {
+    throw new Error('Method not implemented.');
+  }
   protected readonly title = signal('angular-best-doc-web');
+
+  onOpen(): void {
+    alert("Message from the button");
+  }
 }
