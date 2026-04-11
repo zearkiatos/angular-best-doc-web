@@ -15,3 +15,9 @@ $ ng serve
 
 $ ng serve -o
 ```
+
+## Create component
+
+```sh
+$ ng generate component [Component's name] 
+```

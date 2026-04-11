@@ -1,19 +1,27 @@
-import { Component, signal, OnInit } from '@angular/core';
+import { Component, signal, OnInit, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { AppLoggerService } from './core/logging/application/app-logger.service';
+import { TraceContextService } from './core/logging/application/trace-context.service';
+import { Dashboard } from "./dashboard/dashboard";
+
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, Dashboard],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
 export class App implements OnInit {
+  private logger = inject(AppLoggerService);
+  private traceService = inject(TraceContextService);
+
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    this.traceService.startTrace();
+    this.logger.info('App initialized 🚀✅', {
+      scope: 'AppComponent',
+      extra: { title: this.title() },
+      tags: ['app', 'init'],
+    });
   }
   protected readonly title = signal('angular-best-doc-web');
-
-  onOpen(): void {
-    alert("Message from the button");
-  }
 }
