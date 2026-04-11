@@ -19,5 +19,9 @@ $ ng serve -o
 ## Create component
 
 ```sh
-$ ng generate component [Component's name] 
+$ ng generate component [components name]
+
+# Create component on a specifict path
+
+$ ng generate component [Example components/[The name of your component]
 ```

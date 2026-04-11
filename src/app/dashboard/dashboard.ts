@@ -1,11 +1,11 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { AppLoggerService } from '../core/logging/application/app-logger.service';
-import { TraceContextService } from '../core/logging/application/trace-context.service';
+import { BestDocGrid } from '../components/best-doc-grid/best-doc-grid';
 
 
 @Component({
   selector: 'app-dashboard',
-  imports: [],
+  imports: [BestDocGrid],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss',
 })
