@@ -1,5 +1,6 @@
 import { Component, signal, OnInit, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { AppLoggerService } from './core/logging/application/app-logger.service';
 import { TraceContextService } from './core/logging/application/trace-context.service';
 import { Dashboard } from "./dashboard/dashboard";
@@ -7,7 +8,7 @@ import { Dashboard } from "./dashboard/dashboard";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Dashboard],
+  imports: [RouterOutlet, Dashboard, MatSidenavModule],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
