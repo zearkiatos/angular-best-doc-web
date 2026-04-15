@@ -1,13 +1,21 @@
-<mat-sidenav-container>
-  <mat-sidenav #sideNavbar class="mat-sidenavleft" mode="over">
-    <p>Sidenav left
-    </p>
+<mat-sidenav-container class="mat-container">
+  <mat-sidenav #sideNavbar class="mat-sidenavLeft" mode="over">
+    <p>Sidenav left</p>
   </mat-sidenav>
-  <mat-sidenav-container>
-    <button id="openMenu">
-      Open
-    </button>
-  </mat-sidenav-container>
+  <mat-sidenav-content>
+    <mat-toolbar>
+      <mat-toolbar-row>
+        <button id="openMenu" class="btn btn-danger" (click)="sideNavbar.toggle()">Open</button>
+        <h2>Company's name</h2>
+        <span class="toolbar-middle-space"></span>
+        <button id="openSidebar" class="btn" (click)="drawerRight.toggle()">User</button>
+      </mat-toolbar-row>
+      <mat-toolbar-row>
+        <h2>{{title()}}</h2>
+      </mat-toolbar-row>
+    </mat-toolbar>
+    <app-dashboard></app-dashboard>
+  </mat-sidenav-content>
   <mat-sidenav #drawerRight class="mat-sidenavRight" position="end" mode="push">
     <p>Sidenav right</p>
   </mat-sidenav>

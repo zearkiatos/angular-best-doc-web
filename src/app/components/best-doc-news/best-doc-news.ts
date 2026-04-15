@@ -1,10 +1,12 @@
 import { Component, OnInit, inject } from '@angular/core';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatIconModule } from '@angular/material/icon';
 import { AppLoggerService } from '../../core/logging/application/app-logger.service';
-
+import { BestDocNewsItem } from "../best-doc-news-item/best-doc-news-item";
 
 @Component({
   selector: 'app-best-doc-news',
-  imports: [],
+  imports: [MatExpansionModule, BestDocNewsItem, MatIconModule],
   templateUrl: './best-doc-news.html',
   styleUrl: './best-doc-news.scss',
 })
