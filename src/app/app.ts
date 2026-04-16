@@ -1,15 +1,21 @@
 import { Component, signal, OnInit, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { AppLoggerService } from './core/logging/application/app-logger.service';
 import { TraceContextService } from './core/logging/application/trace-context.service';
-import { Dashboard } from "./dashboard/dashboard";
-
+import { Dashboard } from './dashboard/dashboard';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Dashboard],
+  imports: [
+    RouterOutlet,
+    Dashboard,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatToolbarModule],
   templateUrl: './app.html',
-  styleUrl: './app.scss'
+  styleUrl: './app.scss',
 })
 export class App implements OnInit {
   private logger = inject(AppLoggerService);
@@ -23,5 +29,5 @@ export class App implements OnInit {
       tags: ['app', 'init'],
     });
   }
-  protected readonly title = signal('angular-best-doc-web');
+  protected readonly title = signal('BestDoc');
 }

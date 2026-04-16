@@ -1,0 +1,16 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: local.Dockerfile
+    container_name: "angular-best-doc-web-local"
+    ports:
+      - "0.0.0.0:8001:8000"
+    env_file:
+      - .env.local
+    volumes:
+      - .:/app
+      - /app/node_modules
+    expose:
+      - "8000"
+    tty: true

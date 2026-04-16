@@ -1,0 +1,12 @@
+.item-cell, .item-cell-first, .item-cell-last {
+  display: table-cell;
+  min-width: 200px;
+  min-height: 75px;
+  padding: 0px 10px 20px 10px;
+  label {
+    display: block;
+  }
+  span {
+    display: block;
+  }
+}
