@@ -36,7 +36,7 @@ jobs:
     - name: Build docker 🐳
       run: docker build . -t=angular-best-doc-web:build-$GITHUB_RUN_NUMBER
     - name: Build
-      run: npm run deploy
+      run: npm run build
     - name: Upload production-ready build files
       uses: actions/upload-artifact@v4
       with:
