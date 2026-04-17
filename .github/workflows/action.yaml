@@ -47,8 +47,12 @@ jobs:
     name: Deploy
     needs: build
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
     - name: Download artifact
       uses: actions/download-artifact@v4
       with:
