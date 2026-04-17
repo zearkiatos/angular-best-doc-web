@@ -10,7 +10,7 @@ Make small, safe, reviewable changes.
 - Prefer existing project conventions.
 
 ## Build & Test
-- Use Gradle: make build
+- Use npm : npm run build, npm run test, npm run start
 - Always validate with: make test (plus module tasks if relevant)
 
 ## Output format
