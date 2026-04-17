@@ -1,0 +1,66 @@
+name: Node.js CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment:
+      name: staging
+    strategy:
+      matrix:
+        node-version: [24.x]
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+    - name: Set up Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: Install dependencies
+      run: |
+        npm install
+        npm install -g @angular/cli
+    - name: Public URL
+      run: export PUBLIC_URL=https://zearkiatos.github.io/angular-best-doc-web/
+    - name: Create .env
+      run: |
+        touch .env &&
+        echo "CI=${CI}" > .env &&
+        echo "NG_CLI_ANALYTICS=${NG_CLI_ANALYTICS}" >> .env &&
+        echo "PORT=${PORT}" >> .env
+      env:
+        CI: ${{ vars.CI }}
+        NG_CLI_ANALYTICS: ${{ vars.NG_CLI_ANALYTICS }}
+        PORT: ${{ vars.PORT }}
+    - name: Build docker 🐳
+      run: docker build . -t=angular-best-doc-web:build-$GITHUB_RUN_NUMBER
+    - name: Build
+      run: npm run build
+    - name: Upload production-ready build files
+      uses: actions/upload-artifact@v4
+      with:
+        name: production-files
+        path: ./dist/angular-best-doc-web/browser
+
+  deploy:
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    - name: Download artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: production-files
+        path: ./dist/angular-best-doc-web/browser
+
+    - name: Deploy to gh-pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./dist/angular-best-doc-web/browser

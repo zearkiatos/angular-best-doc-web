@@ -1,0 +1,39 @@
+<div *ngFor="let document of documents">
+  <div class="item-cell-first">
+    <label>Id:</label>
+    <span>{{document.id}}</span>
+  </div>
+  <div class="item-cell">
+    <label>Field title</label>
+    <span>{{document.file}}</span>
+  </div>
+  <div class="item-cell">
+    <label>File name:</label>
+    <span>{{document.fileName}}</span>
+  </div>
+  <div class="item-cell">
+    <label>Applicant:</label>
+    <span>{{document.applicant}}</span>
+  </div>
+  <div class="item-cell">
+    <label>Deparment:</label>
+    <span>{{document.department}}</span>
+  </div>
+  <div class="item-cell">
+    <label>Weight:</label>
+    <span>{{document.weight}}</span>
+  </div>
+    <div class="item-cell">
+    <label>Owner:</label>
+    <span>{{document.owner}}</span>
+  </div>
+
+  <div class="item-cell">
+    <label>Status:</label>
+    <mat-icon [class]="document.status ? 'icon-active' : 'icon-inactive'">check</mat-icon>
+  </div>
+  <div class="item-cell-last">
+    <label>Actions:</label>
+    <span></span>
+  </div>
+</div>
