@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: angular-best-doc-web-configmap
+data:
+  CI: "true"
+  NG_CLI_ANALYTICS: "false"
+  PORT: "80"

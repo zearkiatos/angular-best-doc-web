@@ -1,0 +1,35 @@
+<section class="container">
+  <form id="new-document" class="row">
+    <mat-form-field class="col-12 col-md-6">
+      <mat-label for="title">File Title:</mat-label>
+      <input matInput placeholder="Title file for loading" value="">
+    </mat-form-field>
+
+    <mat-form-field class="col-12 col-md-6">
+      <mat-label>File:</mat-label>
+      <input type="file"
+        id="file"
+        (change)="handleFileInput($event.target.files)">
+    </mat-form-field>
+
+    <mat-form-field class="col-12 col-md-6">
+      <mat-label for="applicant">Applicant:</mat-label>
+      <input matInput placeholder="Applicant's name" value="">
+    </mat-form-field>
+
+    <mat-form-field class="col-12 col-md-6">
+      <mat-label for="dependency">Dependency:</mat-label>
+      <input matInput placeholder="Which dependency controls the file?" value="">
+    </mat-form-field>
+
+    <mat-form-field class="col-12 col-md-6">
+      <mat-label for="owner">Owner:</mat-label>
+      <input matInput placeholder="Owner of the file" value="">
+    </mat-form-field>
+
+    <mat-form-field class="col-12 col-md-6">
+      <mat-label for="keywords">Keywords:</mat-label>
+      <input matInput placeholder="Keywords" value="">
+    </mat-form-field>
+  </form>
+</section>

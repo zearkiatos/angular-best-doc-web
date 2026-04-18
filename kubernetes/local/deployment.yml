@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: angular-best-doc-web
+  labels:
+    app: angular-best-doc-web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: angular-best-doc-web
+  template:
+    metadata:
+      labels:
+        app: angular-best-doc-web
+    spec:
+      containers:
+        - name:  angular-best-doc-web
+          image: caprilespe/angular-best-doc-web:1.0.0
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          imagePullPolicy: Always
+          env:
+            - name: "CI"
+              valueFrom:
+                configMapKeyRef:
+                  name:  angular-best-doc-web-configmap
+                  key: CI
+            - name: "NG_CLI_ANALYTICS"
+              valueFrom:
+                configMapKeyRef:
+                  name: angular-best-doc-web-configmap
+                  key: NG_CLI_ANALYTICS
+            - name: "PORT"
+              valueFrom:
+                configMapKeyRef:
+                  name: angular-best-doc-web-configmap
+                  key: PORT
+          volumeMounts:
+          - name: env-volume
+            mountPath: /app/.env
+            subPath: .env
+      volumes:
+      - name: env-volume
+        configMap:
+          name: angular-best-doc-web-configmap
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: angular-best-doc-web-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: angular-best-doc-web
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
