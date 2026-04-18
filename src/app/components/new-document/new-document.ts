@@ -1,12 +1,14 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { AppLoggerService } from '../../core/logging/application/app-logger.service';
 
 @Component({
   selector: 'app-new-document',
-  imports: [MatFormFieldModule],
+  imports: [CommonModule, MatFormFieldModule, MatInputModule],
   templateUrl: './new-document.html',
-  styleUrl: './new-document.scss',
+  styleUrl: './new-document.scss'
 })
 export class NewDocument implements OnInit {
   fileToUpload: File | null = null;

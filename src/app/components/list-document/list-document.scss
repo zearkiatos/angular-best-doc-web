@@ -1,0 +1,15 @@
+
+.icon {
+  &-active {
+    @extend .icon;
+    color: green;
+  }
+  &-inactive {
+    @extend .icon;
+    color: red;
+  }
+}
+label {
+  font-weight: bold;
+  margin-right: 5px;
+}

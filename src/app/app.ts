@@ -1,10 +1,11 @@
 import { Component, signal, OnInit, inject } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterOutlet, RouterLink } from '@angular/router';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { AppLoggerService } from './core/logging/application/app-logger.service';
 import { TraceContextService } from './core/logging/application/trace-context.service';
 import { Dashboard } from './dashboard/dashboard';
+import { BestDocFooter } from "./components/best-doc-footer/best-doc-footer";
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,10 @@ import { Dashboard } from './dashboard/dashboard';
     Dashboard,
     MatSidenavModule,
     MatToolbarModule,
-    MatToolbarModule],
+    MatToolbarModule,
+    BestDocFooter,
+    RouterLink
+],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })

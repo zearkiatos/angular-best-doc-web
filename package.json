@@ -10,7 +10,8 @@
     "test": "ng test",
     "prebuild": "npm run config",
     "prestart": "npm run config",
-    "pretest": "npm run config"
+    "pretest": "npm run config",
+    "preci": "npm run config"
   },
   "private": true,
   "packageManager": "npm@11.11.0",

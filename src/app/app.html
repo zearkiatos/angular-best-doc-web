@@ -1,6 +1,25 @@
 <mat-sidenav-container class="mat-container">
   <mat-sidenav #sideNavbar class="mat-sidenavLeft" mode="over">
     <p>Sidenav left</p>
+    <nav>
+      <ul>
+        <li>
+          <a routerLink="/">
+            Home
+          </a>
+        </li>
+        <li>
+          <a routerLink="/documents">
+            Document List
+          </a>
+        </li>
+        <li>
+          <a routerLink="/documents/new">
+            Upload Documents
+          </a>
+        </li>
+      </ul>
+    </nav>
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar>
@@ -14,9 +33,10 @@
         <h2>{{title()}}</h2>
       </mat-toolbar-row>
     </mat-toolbar>
-    <app-dashboard></app-dashboard>
+    <router-outlet></router-outlet>
   </mat-sidenav-content>
   <mat-sidenav #drawerRight class="mat-sidenavRight" position="end" mode="push">
     <p>Sidenav right</p>
   </mat-sidenav>
 </mat-sidenav-container>
+<app-best-doc-footer></app-best-doc-footer>
