@@ -37,3 +37,9 @@ $ ng generate module [Module Name]
 ```sh
 $ ng generate component [Component name] --module=[mODULE NAME]
 ```
+
+# Create a project with routing
+
+```sh
+$ ng new [Project name] --routing
+```

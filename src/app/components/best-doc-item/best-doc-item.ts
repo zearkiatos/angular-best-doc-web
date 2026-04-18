@@ -42,8 +42,3 @@ export class BestDocItem implements OnInit {
     });
   }
 }
-
-enum Status {
-  Active = "Active",
-  Inactive = "Inactive"
-}

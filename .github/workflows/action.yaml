@@ -27,12 +27,20 @@ jobs:
       run: |
         touch .env &&
         echo "CI=${CI}" > .env &&
+        echo "NODE_ENV=${NODE_ENV}" >> .env &&
         echo "NG_CLI_ANALYTICS=${NG_CLI_ANALYTICS}" >> .env &&
-        echo "PORT=${PORT}" >> .env
+        echo "PORT=${PORT}" >> .env &&
+        echo "ENABLE_CONSOLE_LOG=${ENABLE_CONSOLE_LOG}" >> .env &&
+        echo "LOG_LEVEL=${LOG_LEVEL}" >> .env &&
+        echo "BASE_PATH=${BASE_PATH}" >> .env
       env:
         CI: ${{ vars.CI }}
+        NODE_ENV: ${{ vars.NODE_ENV }}
         NG_CLI_ANALYTICS: ${{ vars.NG_CLI_ANALYTICS }}
         PORT: ${{ vars.PORT }}
+        ENABLE_CONSOLE_LOG: ${{ vars.ENABLE_CONSOLE_LOG }}
+        LOG_LEVEL: ${{ vars.LOG_LEVEL }}
+        BASE_PATH: ${{ vars.BASE_PATH }}
     - name: Build docker 🐳
       run: docker build . -t=angular-best-doc-web:build-$GITHUB_RUN_NUMBER
     - name: Build

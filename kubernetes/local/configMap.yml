@@ -6,3 +6,7 @@ data:
   CI: "true"
   NG_CLI_ANALYTICS: "false"
   PORT: "80"
+  NODE_ENV: "local"
+  ENABLE_CONSOLE_LOG: "true"
+  LOG_LEVEL: "debug"
+  BASE_PATH: "/"

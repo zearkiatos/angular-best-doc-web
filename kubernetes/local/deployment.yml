@@ -43,6 +43,26 @@ spec:
                 configMapKeyRef:
                   name: angular-best-doc-web-configmap
                   key: PORT
+            - name: "NODE_ENV"
+              valueFrom:
+                configMapKeyRef:
+                  name: angular-best-doc-web-configmap
+                  key: NODE_ENV
+            - name: "ENABLE_CONSOLE_LOG"
+              valueFrom:
+                configMapKeyRef:
+                  name: angular-best-doc-web-configmap
+                  key: ENABLE_CONSOLE_LOG
+            - name: "LOG_LEVEL"
+              valueFrom:
+                configMapKeyRef:
+                  name: angular-best-doc-web-configmap
+                  key: LOG_LEVEL
+            - name: "BASE_PATH"
+              valueFrom:
+                configMapKeyRef:
+                  name: angular-best-doc-web-configmap
+                  key: BASE_PATH
           volumeMounts:
           - name: env-volume
             mountPath: /app/.env
