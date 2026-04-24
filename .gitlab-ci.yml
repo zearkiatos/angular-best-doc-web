@@ -1,0 +1,84 @@
+image: node:24-alpine
+stages:
+  - install
+  - docker
+
+install-dependencies:
+  stage: install
+  script:
+    - touch .env
+    - echo "NODE_ENV=${NODE_ENV}" > .env
+    - echo "CI=${CI}" >> .env
+    - echo "NG_CLI_ANALYTICS=${NG_CLI_ANALYTICS}" >> .env
+    - echo "PORT=${PORT}" >> .env
+    - echo "ENABLE_CONSOLE_LOG=${ENABLE_CONSOLE_LOG}" >> .env
+    - echo "LOG_LEVEL=${LOG_LEVEL}" >> .env
+    - echo "BASE_PATH=${BASE_PATH}" >> .env
+    - npm install
+  artifacts:
+    expire_in: 1hr
+    paths:
+      - /
+
+build-docker:
+  image: docker:latest
+  variables:
+    DOCKER_DRIVER: overlay
+    CRYPTOGRAPHY_DONT_BUILD_RUST: 1
+  services:
+  - docker:dind
+  stage: docker
+  environment: staging
+  cache:
+    paths:
+      - node_modules/
+  dependencies:
+    - install-dependencies
+  script:
+    - echo "Build docker 🐳"
+    - docker build . -t=angular-best-doc-web:gitlab-${CI_PIPELINE_IID}
+  artifacts:
+    expire_in: 1hr
+    paths:
+      - build
+
+build-app:
+  stage: build
+  environment: staging
+  cache:
+    paths:
+      - node_modules/
+  dependencies:
+    - install-dependencies
+    - build-docker
+  script:
+    - echo "Deploy a review app 🛠"
+    - touch .env
+    - echo "NODE_ENV=${NODE_ENV}" > .env
+    - echo "CI=${CI}" >> .env
+    - echo "NG_CLI_ANALYTICS=${NG_CLI_ANALYTICS}" >> .env
+    - echo "PORT=${PORT}" >> .env
+    - echo "ENABLE_CONSOLE_LOG=${ENABLE_CONSOLE_LOG}" >> .env
+    - echo "LOG_LEVEL=${LOG_LEVEL}" >> .env
+    - echo "BASE_PATH=${BASE_PATH}" >> .env
+    - npm run build
+  artifacts:
+    expire_in: 1hr
+    paths:
+      - build
+
+pages:
+  stage: deploy
+  environment: staging
+  dependencies:
+    - build-app
+  script:
+    - echo "Deploy a review app 🚀"
+    - rm -rf public
+    - cp dist/angular-best-doc-web/browser/index.html dist/angular-best-doc-web/browser/404.html
+    - mv dist public
+  artifacts:
+    paths:
+      - public
+  only:
+    - branches+

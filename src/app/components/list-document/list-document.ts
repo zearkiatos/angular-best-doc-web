@@ -2,6 +2,7 @@ import { Component, OnInit, inject, ChangeDetectorRef, ChangeDetectionStrategy }
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import { Router } from '@angular/router';
 import { AppLoggerService } from '../../core/logging/application/app-logger.service';
 import { DocumentDataResponse } from '../../core/document/application/dto/DocumentDataResponse';
 import { GetDocumentsUseCases } from '../../core/document/application/GetDocumentsUseCases';
@@ -18,6 +19,20 @@ export class ListDocument implements OnInit {
   private logger = inject(AppLoggerService);
   private cdr = inject(ChangeDetectorRef);
   documents: DocumentDataResponse[] = [];
+
+  constructor(private router: Router) {
+
+  }
+
+  goOwner(ownerName: String) {
+    this.logger.info('Navigating to owner details 🧑‍💼➡️', {
+        scope: 'ListDocumentComponent',
+        tags: ['list-document', 'navigate-owner'],
+    });
+
+    this.router.navigate(['/documents/owner'], { queryParams: { name: ownerName } });
+  }
+
   ngOnInit(): void {
     this.logger.info('ListDocument initialized ✅', {
       scope: 'ListDocumentComponent',

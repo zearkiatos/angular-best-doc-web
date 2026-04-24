@@ -32,7 +32,9 @@
           </div>
           <div class="item-cell">
             <label>Owner: </label>
-            <span>{{ document.owner }}</span>
+            <span>
+              <a (click)="goOwner(document.owner)">{{ document.owner }}</a>
+            </span>
           </div>
 
           <div class="item-cell">
