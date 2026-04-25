@@ -2,6 +2,8 @@ image: node:24-alpine
 stages:
   - install
   - docker
+  - build
+  - deploy
 
 install-dependencies:
   stage: install
