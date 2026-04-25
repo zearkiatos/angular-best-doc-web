@@ -43,3 +43,9 @@ $ ng generate component [Component name] --module=[mODULE NAME]
 ```sh
 $ ng new [Project name] --routing
 ```
+
+# Create interfaces
+
+```sh
+$ ng generate interface [Component name]
+```

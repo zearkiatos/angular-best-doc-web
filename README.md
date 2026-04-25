@@ -13,6 +13,8 @@ This is an 🅰️ngular Web project to practice how to use it and learn about U
 
 Github: [https://zearkiatos.github.io/angular-best-doc-web/](https://zearkiatos.github.io/angular-best-doc-web/)
 
+Gitlab: [https://angular-best-doc-web-dc9166.gitlab.io/](https://angular-best-doc-web-dc9166.gitlab.io/)
+
 # AngularBestDocWeb
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.7.
