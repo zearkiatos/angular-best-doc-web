@@ -24,6 +24,16 @@ jobs:
           chmod 600 ~/.ssh/gitlab_mirror_key
           ssh-keyscan gitlab.com >> ~/.ssh/known_hosts
 
+      - name: Debug private key file safely
+        run: |
+          echo "File exists?"
+          ls -la ~/.ssh/gitlab_mirror_key
+          echo "First line:"
+          head -n 1 ~/.ssh/gitlab_mirror_key
+          echo "Last line:"
+          tail -n 1 ~/.ssh/gitlab_mirror_key
+          echo "Validate key:"
+          ssh-keygen -y -f ~/.ssh/gitlab_mirror_key > /dev/null
       - name: Push mirror to GitLab 🪞 🦊
         run: |
               git remote add gitlab git@gitlab.com:caprilespe/angular-best-doc-web.git
