@@ -20,7 +20,7 @@ jobs:
       - name: Configure SSH 🔑
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.GITLAB_SSH_PRIVATE_KEY }}" > ~/.ssh/gitlab_mirror_key
+          echo "${{ secrets.GITLAB_SSH_PRIVATE_KEY_B64 }}" | base64 -d > ~/.ssh/gitlab_mirror_key
           chmod 600 ~/.ssh/gitlab_mirror_key
           ssh-keyscan gitlab.com >> ~/.ssh/known_hosts
 
