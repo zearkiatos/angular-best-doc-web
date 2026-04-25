@@ -1,86 +1,74 @@
 image: node:24-alpine
+
 stages:
-  - install
-  - docker
   - build
   - deploy
 
-install-dependencies:
-  stage: install
-  script:
-    - touch .env
-    - echo "NODE_ENV=${NODE_ENV}" > .env
-    - echo "CI=${CI}" >> .env
-    - echo "NG_CLI_ANALYTICS=${NG_CLI_ANALYTICS}" >> .env
-    - echo "PORT=${PORT}" >> .env
-    - echo "ENABLE_CONSOLE_LOG=${ENABLE_CONSOLE_LOG}" >> .env
-    - echo "LOG_LEVEL=${LOG_LEVEL}" >> .env
-    - echo "BASE_PATH=${BASE_PATH}" >> .env
-    - npm install
-  artifacts:
-    expire_in: 1hr
-    paths:
-      - /
+variables:
+  NODE_ENV: production
+  CI: "true"
+  NG_CLI_ANALYTICS: "false"
 
-build-docker:
-  image: docker:latest
-  variables:
-    DOCKER_DRIVER: overlay
-    CRYPTOGRAPHY_DONT_BUILD_RUST: 1
-  services:
-  - docker:dind
-  stage: docker
-  environment: staging
-  cache:
-    paths:
-      - node_modules/
-  dependencies:
-    - install-dependencies
-  script:
-    - echo "Build docker 🐳"
-    - docker build . -t=angular-best-doc-web:gitlab-${CI_PIPELINE_IID}
-  artifacts:
-    expire_in: 1hr
-    paths:
-      - build
-
-build-app:
+build:docker_and_npm:
   stage: build
-  environment: staging
+  image: docker:latest
+  services:
+    - docker:dind
+  variables:
+    DOCKER_HOST: tcp://docker:2375
+    DOCKER_TLS_CERTDIR: ""
+    DOCKER_DRIVER: overlay2
   cache:
     paths:
       - node_modules/
-  dependencies:
-    - install-dependencies
-    - build-docker
   script:
-    - echo "Deploy a review app 🛠"
+    # Instalar Node.js en contenedor Docker para build Angular
+    - apk add --no-cache nodejs npm
+
+    # Instalar dependencias
+    - npm ci
+    - npm install -g @angular/cli
+
+    # Crear .env con variables de CI
     - touch .env
     - echo "NODE_ENV=${NODE_ENV}" > .env
     - echo "CI=${CI}" >> .env
     - echo "NG_CLI_ANALYTICS=${NG_CLI_ANALYTICS}" >> .env
-    - echo "PORT=${PORT}" >> .env
-    - echo "ENABLE_CONSOLE_LOG=${ENABLE_CONSOLE_LOG}" >> .env
-    - echo "LOG_LEVEL=${LOG_LEVEL}" >> .env
-    - echo "BASE_PATH=${BASE_PATH}" >> .env
+    - echo "PORT=${PORT:-4200}" >> .env
+    - echo "ENABLE_CONSOLE_LOG=${ENABLE_CONSOLE_LOG:-false}" >> .env
+    - echo "LOG_LEVEL=${LOG_LEVEL:-info}" >> .env
+    - echo "BASE_PATH=${BASE_PATH:-/}" >> .env
+
+    # Build Docker image
+    - echo "Building Docker image 🐳"
+    - docker build . -t=angular-best-doc-web:gitlab-${CI_PIPELINE_IID}
+
+    # Build Angular app
+    - echo "Building Angular app 🛠"
     - npm run build
   artifacts:
-    expire_in: 1hr
+    expire_in: 1 day
     paths:
-      - build
+      - dist/angular-best-doc-web/browser/
+  only:
+    - merge_requests
+    - main
 
 pages:
   stage: deploy
-  environment: staging
+  image: node:24-alpine
   dependencies:
-    - build-app
+    - build:docker_and_npm
   script:
-    - echo "Deploy a review app 🚀"
-    - rm -rf public
-    - cp dist/angular-best-doc-web/browser/index.html dist/angular-best-doc-web/browser/404.html
-    - mv dist public
+    - echo "Deploying to GitLab Pages 🚀"
+    - mkdir -p public
+    - cp -r dist/angular-best-doc-web/browser/* public/
+    - cp public/index.html public/404.html
   artifacts:
     paths:
       - public
+  environment:
+    name: production
+    url: https://$CI_PROJECT_NAMESPACE.gitlab.io/$CI_PROJECT_NAME/
   only:
-    - branches+
+    - main
