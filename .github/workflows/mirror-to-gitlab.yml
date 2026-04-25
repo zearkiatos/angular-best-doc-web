@@ -26,5 +26,6 @@ jobs:
 
       - name: Push mirror to GitLab 🪞 🦊
         run: |
-          git remote add gitlab git@gitlab.com:caprilespe/angular-best-doc-web.git
-          GIT_SSH_COMMAND="ssh -i ~/.ssh/gitlab_mirror_key -o StrictHostKeyChecking=yes" git push --mirror gitlab
+              git remote add gitlab git@gitlab.com:caprilespe/angular-best-doc-web.git
+              GIT_SSH_COMMAND="ssh -i ~/.ssh/gitlab_mirror_key -o StrictHostKeyChecking=yes" git push gitlab --all
+              GIT_SSH_COMMAND="ssh -i ~/.ssh/gitlab_mirror_key -o StrictHostKeyChecking=yes" git push gitlab --tags
