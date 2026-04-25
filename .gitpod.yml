@@ -1,4 +1,5 @@
-image:  gitpod.Dockerfile
+image:
+  file: .gitpod.Dockerfile
 
 ports:
   - port: 4200
@@ -16,7 +17,7 @@ ports:
 env:
   NODE_ENV: staging
   CI: "true"
-  NG_CLI_ANALYTICS: "true"
+  NG_CLI_ANALYTICS: "false"
   LOG_LEVEL: "debug"
   ENABLE_CONSOLE_LOG: "true"
   BASE_PATH: "/"
