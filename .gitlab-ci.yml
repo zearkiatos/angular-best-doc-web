@@ -16,8 +16,10 @@ variables:
 install:dependencies:
   stage: build
   script:
+    - echo "Installing dependencies..."
     - npm ci
     - npm install -g @angular/cli
+    - echo "✓ Dependencies installed"
   artifacts:
     expire_in: 1 day
     paths:
@@ -35,7 +37,9 @@ build:angular:
     paths:
       - node_modules/
   script:
-    - echo "Creating .env file..."
+    - set -e  # Detiene en primer error
+
+    - echo "=== 1. Creating .env file ==="
     - touch .env
     - echo "NODE_ENV=${NODE_ENV}" > .env
     - echo "CI=${CI}" >> .env
@@ -44,30 +48,32 @@ build:angular:
     - echo "ENABLE_CONSOLE_LOG=${ENABLE_CONSOLE_LOG}" >> .env
     - echo "LOG_LEVEL=${LOG_LEVEL}" >> .env
     - echo "BASE_PATH=${BASE_PATH}" >> .env
-    - echo "=== .env content ==="
     - cat .env
 
-    - echo "=== Running npm run config (pre-build) ==="
-    - npm run config
+    - echo "=== 2. Running npm run config ==="
+    - npm run config || (echo "❌ npm run config failed!"; exit 1)
 
-    - echo "=== Checking if environment.prod.ts was generated ==="
-    - ls -la src/environments/ || echo "❌ No environments folder!"
-    - test -f src/environments/environment.prod.ts && echo "✓ environment.prod.ts exists" || echo "❌ environment.prod.ts NOT found!"
+    - echo "=== 3. Checking environment.prod.ts ==="
+    - ls -la src/environments/
+    - test -f src/environments/environment.prod.ts && echo "✓ environment.prod.ts generated" || (echo "❌ environment.prod.ts NOT generated!"; exit 1)
 
-    - echo "=== Building Angular app ==="
-    - npm run build
+    - echo "=== 4. Building Angular app (this may take a moment) ==="
+    - npm run build 2>&1 || (echo "❌ npm run build failed! Check output above"; exit 1)
 
-    - echo "=== Checking build output ==="
-    - ls -la dist/ || echo "❌ dist folder not created!"
-    - ls -la dist/angular-best-doc-web/browser/ || echo "❌ browser folder not found! Checking dist structure..."
-    - find dist/ -type f | head -20
+    - echo "=== 5. Verifying build output ==="
+    - echo "Contents of dist/:"
+    - find dist/ -type f -o -type d | head -30
+    - test -d dist/angular-best-doc-web/browser && echo "✓ Build successful!" || (echo "❌ Build output folder not found!"; exit 1)
+
   artifacts:
     expire_in: 1 day
     paths:
       - dist/
+    when: always  # Guardar artifacts incluso si falla (para debugging)
   only:
     - merge_requests
     - main
+    - develop
 
 # Deploy a GitLab Pages
 pages:
@@ -76,16 +82,19 @@ pages:
   dependencies:
     - build:angular
   script:
-    - echo "=== Checking artifacts from build:angular ==="
-    - ls -la dist/ || echo "❌ dist not available!"
-    - ls -la dist/angular-best-doc-web/browser/ || echo "❌ browser folder missing!"
+    - set -e
+
+    - echo "=== Checking inherited artifacts ==="
+    - test -d dist/ && echo "✓ dist/ inherited from build:angular" || (echo "❌ dist/ not inherited!"; exit 1)
+    - ls -la dist/angular-best-doc-web/browser/
 
     - echo "=== Deploying to GitLab Pages ==="
     - mkdir -p public
     - cp -r dist/angular-best-doc-web/browser/* public/
     - cp public/index.html public/404.html
-    - echo "✓ Deployment complete. Files in public/:"
+    - echo "✓ Files copied to public/"
     - ls -la public/ | head -10
+
   artifacts:
     paths:
       - public
