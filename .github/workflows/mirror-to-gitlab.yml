@@ -10,7 +10,8 @@ on:
 jobs:
   mirror:
     runs-on: ubuntu-latest
-
+    environment:
+      name: staging
     steps:
       - name: Checkout full repository
         uses: actions/checkout@v4
