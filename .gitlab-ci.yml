@@ -8,62 +8,84 @@ variables:
   NODE_ENV: production
   CI: "true"
   NG_CLI_ANALYTICS: "false"
+  LOG_LEVEL: info
+  ENABLE_CONSOLE_LOG: "false"
+  BASE_PATH: "/"
 
-build:docker_and_npm:
+# Instalar dependencias una sola vez
+install:dependencies:
   stage: build
-  image: docker:latest
-  services:
-    - docker:dind
-  variables:
-    DOCKER_HOST: tcp://docker:2375
-    DOCKER_TLS_CERTDIR: ""
-    DOCKER_DRIVER: overlay2
+  script:
+    - npm ci
+    - npm install -g @angular/cli
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - node_modules/
+  cache:
+    paths:
+      - node_modules/
+
+# Build de Angular en image node (no docker)
+build:angular:
+  stage: build
+  dependencies:
+    - install:dependencies
   cache:
     paths:
       - node_modules/
   script:
-    # Instalar Node.js en contenedor Docker para build Angular
-    - apk add --no-cache nodejs npm
-
-    # Instalar dependencias
-    - npm ci
-    - npm install -g @angular/cli
-
-    # Crear .env con variables de CI
+    - echo "Creating .env file..."
     - touch .env
     - echo "NODE_ENV=${NODE_ENV}" > .env
     - echo "CI=${CI}" >> .env
     - echo "NG_CLI_ANALYTICS=${NG_CLI_ANALYTICS}" >> .env
     - echo "PORT=${PORT:-4200}" >> .env
-    - echo "ENABLE_CONSOLE_LOG=${ENABLE_CONSOLE_LOG:-false}" >> .env
-    - echo "LOG_LEVEL=${LOG_LEVEL:-info}" >> .env
-    - echo "BASE_PATH=${BASE_PATH:-/}" >> .env
+    - echo "ENABLE_CONSOLE_LOG=${ENABLE_CONSOLE_LOG}" >> .env
+    - echo "LOG_LEVEL=${LOG_LEVEL}" >> .env
+    - echo "BASE_PATH=${BASE_PATH}" >> .env
+    - echo "=== .env content ==="
+    - cat .env
 
-    # Build Docker image
-    - echo "Building Docker image 🐳"
-    - docker build . -t=angular-best-doc-web:gitlab-${CI_PIPELINE_IID}
+    - echo "=== Running npm run config (pre-build) ==="
+    - npm run config
 
-    # Build Angular app
-    - echo "Building Angular app 🛠"
+    - echo "=== Checking if environment.prod.ts was generated ==="
+    - ls -la src/environments/ || echo "❌ No environments folder!"
+    - test -f src/environments/environment.prod.ts && echo "✓ environment.prod.ts exists" || echo "❌ environment.prod.ts NOT found!"
+
+    - echo "=== Building Angular app ==="
     - npm run build
+
+    - echo "=== Checking build output ==="
+    - ls -la dist/ || echo "❌ dist folder not created!"
+    - ls -la dist/angular-best-doc-web/browser/ || echo "❌ browser folder not found! Checking dist structure..."
+    - find dist/ -type f | head -20
   artifacts:
     expire_in: 1 day
     paths:
-      - dist/angular-best-doc-web/browser/
+      - dist/
   only:
     - merge_requests
     - main
 
+# Deploy a GitLab Pages
 pages:
   stage: deploy
   image: node:24-alpine
   dependencies:
-    - build:docker_and_npm
+    - build:angular
   script:
-    - echo "Deploying to GitLab Pages 🚀"
+    - echo "=== Checking artifacts from build:angular ==="
+    - ls -la dist/ || echo "❌ dist not available!"
+    - ls -la dist/angular-best-doc-web/browser/ || echo "❌ browser folder missing!"
+
+    - echo "=== Deploying to GitLab Pages ==="
     - mkdir -p public
     - cp -r dist/angular-best-doc-web/browser/* public/
     - cp public/index.html public/404.html
+    - echo "✓ Deployment complete. Files in public/:"
+    - ls -la public/ | head -10
   artifacts:
     paths:
       - public
@@ -71,5 +93,5 @@ pages:
     name: production
     url: https://$CI_PROJECT_NAMESPACE.gitlab.io/$CI_PROJECT_NAME/
   only:
+    - main
     - develop
-    - master
