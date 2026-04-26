@@ -49,3 +49,9 @@ $ ng new [Project name] --routing
 ```sh
 $ ng generate interface [Component name]
 ```
+
+# Create services
+
+```sh
+$ ng generate service [Service name]
+```

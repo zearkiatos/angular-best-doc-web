@@ -6,6 +6,7 @@ import { AppLoggerService } from './core/logging/application/app-logger.service'
 import { TraceContextService } from './core/logging/application/trace-context.service';
 import { Dashboard } from './dashboard/dashboard';
 import { BestDocFooter } from "./components/best-doc-footer/best-doc-footer";
+import { BestDocDocuments } from './services/best-doc-documents';
 
 @Component({
   selector: 'app-root',
@@ -20,6 +21,7 @@ import { BestDocFooter } from "./components/best-doc-footer/best-doc-footer";
 ],
   templateUrl: './app.html',
   styleUrl: './app.scss',
+  providers: [BestDocDocuments]
 })
 export class App implements OnInit {
   private logger = inject(AppLoggerService);

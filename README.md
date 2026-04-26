@@ -2,6 +2,7 @@
 This is an 🅰️ngular Web project to practice how to use it and learn about UI and UX design 🎨
 
 ![Github](https://github.com/zearkiatos/angular-best-doc-web/actions/workflows/action.yaml/badge.svg)
+![GitlabCI](https://gitlab.com/caprilespe/angular-best-doc-web/badges/develop/pipeline.svg)
 
 # Made with
 [![Angular](https://img.shields.io/badge/angular-c42d30?style=for-the-badge&logo=angular&logoColor=white&labelColor=000000)]()
@@ -13,7 +14,7 @@ This is an 🅰️ngular Web project to practice how to use it and learn about U
 
 Github: [https://zearkiatos.github.io/angular-best-doc-web/](https://zearkiatos.github.io/angular-best-doc-web/)
 
-Gitlab: [https://angular-best-doc-web-dc9166.gitlab.io/](https://angular-best-doc-web-dc9166.gitlab.io/)
+Gitlab 🦊: [https://angular-best-doc-web-dc9166.gitlab.io/](https://angular-best-doc-web-dc9166.gitlab.io/)
 
 # AngularBestDocWeb
 

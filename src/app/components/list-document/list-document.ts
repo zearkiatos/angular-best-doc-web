@@ -5,8 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
 import { AppLoggerService } from '../../core/logging/application/app-logger.service';
 import { DocumentDataResponse } from '../../core/document/application/dto/DocumentDataResponse';
-import { GetDocumentsUseCases } from '../../core/document/application/GetDocumentsUseCases';
-import { JsonDocumentDataRepository } from '../../core/document/infrastructure/databases/JsonDocumentDataRepository';
+import { BestDocDocuments } from '../../services/best-doc-documents';
 
 @Component({
   selector: 'app-list-document',
@@ -20,7 +19,7 @@ export class ListDocument implements OnInit {
   private cdr = inject(ChangeDetectorRef);
   documents: DocumentDataResponse[] = [];
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private documentService: BestDocDocuments) {
 
   }
 
@@ -39,10 +38,7 @@ export class ListDocument implements OnInit {
       tags: ['list-document', 'init'],
     });
 
-    const getDocumentsUseCases = new GetDocumentsUseCases(
-      new JsonDocumentDataRepository()
-    )
-    getDocumentsUseCases.getDocuments().then(docs => {
+    this.documentService.getDocuments().then(docs => {
       this.documents = docs;
       this.cdr.markForCheck();
       this.logger.info('Documents fetched successfully 📄✅', {
