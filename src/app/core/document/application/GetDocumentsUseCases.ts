@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { DocumentDataRepository } from "../domain/repository/DocumentDataRepository";
 import { DocumentDataPort } from "./port/input/DocumentDataPort";
 import { DocumentDataResponse } from "./dto/DocumentDataResponse";

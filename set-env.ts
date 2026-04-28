@@ -11,6 +11,7 @@ export const environment: EnvironmentConfig = {
     production: ${process.env['NODE_ENV'] === 'production'},
     environment: '${process.env['NODE_ENV']}',
     basePath: '${process.env['BASE_PATH']}',
+    documentApiBaseUrl: '${process.env['DOCUMENT_API_BASE_URL']}',
     logging: {
       level: '${process.env['LOG_LEVEL']}',
       enableConsole: ${process.env['ENABLE_CONSOLE_LOG']},
