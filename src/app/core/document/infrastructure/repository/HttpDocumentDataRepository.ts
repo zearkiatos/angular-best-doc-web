@@ -1,6 +1,6 @@
 import type { DocumentDataRepository } from '../../domain/repository/DocumentDataRepository';
 import { DocumentDataDb } from './mapper/DocumentDataDb';
-import { toDomain, toDomainList } from './mapper/DocumentDataMapper';
+import { toDomainList } from './mapper/DocumentDataMapper';
 import { DocumentData } from '../../domain/model/DocumentData';
 import { environment } from '../../../../../environments/environment.prod';
 import { HttpClient } from '@angular/common/http';
@@ -15,9 +15,9 @@ export class HttpDocumentDataRepository implements DocumentDataRepository {
   }
   async get(): Promise<DocumentData[]> {
     const response = await firstValueFrom(
-      this.httpClient.get<DocumentDataDb[]>(this.documentsBaseUrl)
+      this.httpClient.get<DocumentDataDb[]>(`${this.documentsBaseUrl}/documents`)
     );
-;
+
     return toDomainList(response);
   }
 }

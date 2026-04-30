@@ -48,6 +48,7 @@ build:angular:
     - echo "ENABLE_CONSOLE_LOG=${ENABLE_CONSOLE_LOG}" >> .env
     - echo "LOG_LEVEL=${LOG_LEVEL}" >> .env
     - echo "BASE_PATH=${BASE_PATH}" >> .env
+    - echo "DOCUMENT_API_BASE_URL=${DOCUMENT_API_BASE_URL}" >> .env
     - cat .env
 
     - echo "=== 2. Running npm run config ==="

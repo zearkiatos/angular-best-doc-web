@@ -33,6 +33,7 @@ jobs:
         echo "ENABLE_CONSOLE_LOG=${ENABLE_CONSOLE_LOG}" >> .env &&
         echo "LOG_LEVEL=${LOG_LEVEL}" >> .env &&
         echo "BASE_PATH=${BASE_PATH}" >> .env
+        echo "DOCUMENT_API_BASE_URL=${DOCUMENT_API_BASE_URL}" >> .env
       env:
         CI: ${{ vars.CI }}
         NODE_ENV: ${{ vars.NODE_ENV }}
@@ -41,6 +42,7 @@ jobs:
         ENABLE_CONSOLE_LOG: ${{ vars.ENABLE_CONSOLE_LOG }}
         LOG_LEVEL: ${{ vars.LOG_LEVEL }}
         BASE_PATH: ${{ vars.BASE_PATH }}
+        DOCUMENT_API_BASE_URL: ${{ vars.DOCUMENT_API_BASE_URL }}
     - name: Build docker 🐳
       run: docker build . -t=angular-best-doc-web:build-$GITHUB_RUN_NUMBER
     - name: Build
