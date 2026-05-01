@@ -17,7 +17,9 @@ Github: [https://zearkiatos.github.io/angular-best-doc-web/](https://zearkiatos.
 
 Gitlab 🦊: [https://angular-best-doc-web-dc9166.gitlab.io/](https://angular-best-doc-web-dc9166.gitlab.io/)
 
-Vercel: [https://angular-best-doc-web.vercel.app/](https://angular-best-doc-web.vercel.app/)
+𝒱ercel: [https://angular-best-doc-web.vercel.app/](https://angular-best-doc-web.vercel.app/)
+
+𝙉etlify: [https://angular-best-doc-web.netlify.app/](https://angular-best-doc-web.netlify.app/)
 
 # AngularBestDocWeb
 

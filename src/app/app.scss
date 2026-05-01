@@ -1,3 +1,29 @@
+#identity {
+  width: 200px;
+  height: 25px;
+  span {
+    background-image: url('../assets/images/logo.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+  }
+  strong {
+    background-image: url('../assets/images/logotype.png');
+    background-size: 85%;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 100px;
+    height: 25px;
+    text-indent: 100px;
+    margin-left: -5px;
+    overflow: hidden;
+    filter: brightness(200%)
+  }
+}
 .mat-container {
   height: 100vh;
 }
@@ -9,4 +35,5 @@
 .mat-sidenavLeft, .mat-sidenavRight {
   width: 320px;
   padding: 20px;
+  background-color: black;
 }

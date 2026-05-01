@@ -63,6 +63,11 @@ spec:
                 configMapKeyRef:
                   name: angular-best-doc-web-configmap
                   key: BASE_PATH
+            - name: "DOCUMENT_API_BASE_URL"
+              valueFrom:
+                configMapKeyRef:
+                  name: angular-best-doc-web-configmap
+                  key: DOCUMENT_API_BASE_URL
           volumeMounts:
           - name: env-volume
             mountPath: /app/.env
