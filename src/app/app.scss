@@ -1,3 +1,4 @@
+@import '../styles/partials/colors';
 #identity {
   width: 200px;
   height: 25px;
@@ -26,6 +27,7 @@
 }
 .mat-container {
   height: 100vh;
+  background-color: $best-doc-light-90;
 }
 
 .toolbar-middle-space {
