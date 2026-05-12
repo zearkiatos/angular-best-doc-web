@@ -29,13 +29,15 @@
   <mat-sidenav-content>
     <mat-toolbar>
       <mat-toolbar-row>
-        <button id="openMenu" class="btn btn-danger" (click)="sideNavbar.toggle()">Open</button>
-        <h2>Company's name</h2>
+        <button id="openMenu" class="navbar-toggler btn-info" (click)="sideNavbar.toggle()">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <h2>Walmart ☀️</h2>
         <span class="toolbar-middle-space"></span>
         <button id="openSidebar" class="btn" (click)="drawerRight.toggle()">User</button>
       </mat-toolbar-row>
       <mat-toolbar-row>
-        <h2>{{title()}}</h2>
+        <h3>{{title()}}</h3>
       </mat-toolbar-row>
     </mat-toolbar>
     <router-outlet></router-outlet>

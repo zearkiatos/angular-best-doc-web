@@ -28,6 +28,16 @@
 .mat-container {
   height: 100vh;
   background-color: $best-doc-light-90;
+
+  .mat-sidenav-content {
+    .mat-toolbar {
+      background-color: $best-doc-darken-50;
+      .mat-toolbar-row h2{
+        color: $best-doc-white;
+        font-size: 1.5em;
+      }
+    }
+  }
 }
 
 .toolbar-middle-space {
@@ -38,4 +48,15 @@
   width: 320px;
   padding: 20px;
   background-color: black;
+  background-color: $best-doc-base-color;
+  border-radius: 0px 20px 20px 0px;
+}
+
+.mat-sidenavRight {
+
+}
+
+mat-side {
+  background-color: $best-doc-base-color;
+  color: $best-doc-white;
 }
