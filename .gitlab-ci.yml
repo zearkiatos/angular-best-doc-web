@@ -17,8 +17,9 @@ install:dependencies:
   stage: build
   script:
     - echo "Installing dependencies..."
-    - npm ci
-    - npm install -g @angular/cli
+    - npm install -g pnpm
+    - pnpm install
+    - pnpm install -g @angular/cli
     - echo "✓ Dependencies installed"
   artifacts:
     expire_in: 1 day
@@ -51,15 +52,15 @@ build:angular:
     - echo "DOCUMENT_API_BASE_URL=${DOCUMENT_API_BASE_URL}" >> .env
     - cat .env
 
-    - echo "=== 2. Running npm run config ==="
-    - npm run config || (echo "❌ npm run config failed!"; exit 1)
+    - echo "=== 2. Running pnpm run config ==="
+    - pnpm run config || (echo "❌ pnpm run config failed!"; exit 1)
 
     - echo "=== 3. Checking environment.prod.ts ==="
     - ls -la src/environments/
     - test -f src/environments/environment.prod.ts && echo "✓ environment.prod.ts generated" || (echo "❌ environment.prod.ts NOT generated!"; exit 1)
 
     - echo "=== 4. Building Angular app (this may take a moment) ==="
-    - npm run build 2>&1 || (echo "❌ npm run build failed! Check output above"; exit 1)
+    - pnpm run build 2>&1 || (echo "❌ pnpm run build failed! Check output above"; exit 1)
 
     - echo "=== 5. Verifying build output ==="
     - echo "Contents of dist/:"

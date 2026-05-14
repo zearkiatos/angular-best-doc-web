@@ -6,20 +6,20 @@
         <strong>BestDoc</strong>
       </a>
     </h1>
-    <nav>
-      <ul>
-        <li>
-          <a routerLink="/">
-            Home
+    <nav class="navbar">
+      <ul class="navbar-nav">
+        <li class="navbar-item selected">
+          <a routerLink="/" class="nav-link">
+            <span class="icon-home">Home</span>
           </a>
         </li>
-        <li>
-          <a routerLink="/documents">
+        <li class="navbar-item">
+          <a routerLink="/documents" class="nav-link">
             Document List
           </a>
         </li>
-        <li>
-          <a routerLink="/documents/new">
+        <li class="navbar-item">
+          <a routerLink="/documents/new" class="nav-link">
             Upload Documents
           </a>
         </li>
@@ -34,7 +34,12 @@
         </button>
         <h2>Walmart ☀️</h2>
         <span class="toolbar-middle-space"></span>
-        <button id="openSidebar" class="btn" (click)="drawerRight.toggle()">User</button>
+        <span id="openSidebar" class="btn" (click)="drawerRight.toggle()">
+          Pedro Capriles
+          <span class="icon-user">
+
+          </span>
+        </span>
       </mat-toolbar-row>
       <mat-toolbar-row>
         <h3>{{title()}}</h3>
