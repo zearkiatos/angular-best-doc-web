@@ -17,9 +17,10 @@ install:dependencies:
   stage: build
   script:
     - echo "Installing dependencies..."
-    - npm install -g pnpm
+    - corepack enable
+    - corepack prepare pnpm@9.15.1 --activate
     - pnpm install
-    - pnpm install -g @angular/cli
+    - pnpm add -g @angular/cli
     - echo "✓ Dependencies installed"
   artifacts:
     expire_in: 1 day

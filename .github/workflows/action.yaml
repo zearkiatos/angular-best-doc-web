@@ -14,14 +14,15 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
     - name: Set up Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
+      uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
     - name: Install dependencies
       run: |
-        pnpm install -g pnpm
+        corepack enable
+        corepack prepare pnpm@9.15.1 --activate
         pnpm install
-        pnpm install -g @angular/cli
+        pnpm add -g @angular/cli
     - name: Public URL
       run: export PUBLIC_URL=https://zearkiatos.github.io/angular-best-doc-web/
     - name: Create .env
