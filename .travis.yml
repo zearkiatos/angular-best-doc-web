@@ -14,8 +14,9 @@ cache:
     - "$HOME/.npm"
 
 install:
-  - npm ci
+  - npm install -g pnpm
+  - pnpm install
 
 script:
-  - npm run build
+  - pnpm run build
   - docker build . -t=angular-best-doc-web:travis-build-$TRAVIS_BUILD_NUMBER

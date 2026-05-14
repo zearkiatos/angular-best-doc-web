@@ -29,17 +29,17 @@ tasks:
       echo "📦 Installing Node dependencies..."
       echo "=========================================="
 
-      # npm ci es mejor que npm install en CI/CD y Gitpod
+      # pnpm install es mejor que pnpm install en CI/CD y Gitpod
       # (respeta package-lock.json exactamente)
-      npm ci
+      pnpm install
 
       # Instalar Angular CLI globalmente
-      npm install -g @angular/cli
+      pnpm install -g @angular/cli
 
       # Verificar instalación
       echo ""
       echo "✓ Node version: $(node -v)"
-      echo "✓ npm version: $(npm -v)"
+      echo "✓ pnpm version: $(pnpm -v)"
       echo "✓ Angular CLI version: $(ng version --minimal)"
       echo "=========================================="
       echo "✓ Dependencies installed successfully!"
@@ -66,11 +66,11 @@ tasks:
       fi
       echo "=========================================="
   - name: 🔨 Build Angular App
-    command: npm run build
+    command: pnpm run build
     background: true
 
   - name: 🚀 Start Dev Server
-    command: npm start
+    command: pnpm start
     background: true
 
 vscode:

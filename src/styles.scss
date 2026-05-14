@@ -1,3 +1,4 @@
+
 // Include theming for Angular Material with `mat.theme()`.
 // This Sass mixin will define CSS variables that are used for styling Angular Material
 // components according to the Material 3 design spec.
@@ -5,22 +6,24 @@
 // custom components at https://material.angular.dev/guide/theming
 @use '@angular/material' as mat;
 
+@import 'styles/partials/colors';
+
 @font-face {
-  font-family: "fontawesome-icons";
+  font-family: "FontAwesome";
+  src: url("/assets/fonts/fontawesome-webfont.eot");
   src:
-  url("/assets/fonts/fontawesome-icons.eot") format("embedded-opentype"),
-      url("/assets/fonts/fontawesome-icons.ttf") format("truetype"),
-  url("/assets/fonts/fontawesome-icons.woff2") format("woff2"),
-    url("/assets/fonts/fontawesome-icons.woff") format("woff"),
-    url("/assets/fonts/fontawesome-icons.eot#iefix") format("embedded-opentype"),
-    url("/assets/fonts/fontawesome-icons.svg#fontawesome-icons") format("svg");
+    url("/assets/fonts/fontawesome-webfont.eot?#iefix") format("embedded-opentype"),
+    url("/assets/fonts/fontawesome-webfont.woff2") format("woff2"),
+    url("/assets/fonts/fontawesome-webfont.woff") format("woff"),
+    url("/assets/fonts/fontawesome-webfont.ttf") format("truetype"),
+    url("/assets/fonts/fontawesome-webfont.svg#fontawesomeregular") format("svg");
   font-weight: normal;
   font-style: normal;
   font-display: block;
 }
 
 [class^="icon-"], [class*=" icon-"] {
-  font-family: "fontawesome-icons";
+  font-family: "FontAwesome";
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
@@ -146,7 +149,7 @@ body {
   // Set a default background, font and text colors for the application using
   // Angular Material's system-level CSS variables. Learn more about these
   // variables at https://material.angular.dev/guide/system-variables
-  background-color: var(--mat-sys-surface);
+  background-color: $best-doc-base-color;
   color: var(--mat-sys-on-surface);
   font: var(--mat-sys-body-medium);
 

@@ -6,7 +6,8 @@ RUN apk add --no-cache \
     openssh-client \
     ca-certificates
 
-RUN npm install -g @angular/cli @ionic/cli
+RUN npm install -g pnpm
+RUN pnpm install -g @angular/cli
 
 RUN addgroup -g 1000 gitpod && \
     adduser -D -u 1000 -G gitpod gitpod

@@ -21,6 +21,8 @@ Gitlab 🦊: [https://angular-best-doc-web-dc9166.gitlab.io/](https://angular-be
 
 𝙉etlify: [https://angular-best-doc-web.netlify.app/](https://angular-best-doc-web.netlify.app/)
 
+Firebase 🔥: [https://angular-best-doc-web.web.app/](https://angular-best-doc-web.web.app/)
+
 # AngularBestDocWeb
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.7.

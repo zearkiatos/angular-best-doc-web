@@ -1,3 +1,4 @@
+@import '../styles/partials/colors', '../styles/partials/variables';
 #identity {
   width: 200px;
   height: 25px;
@@ -26,6 +27,27 @@
 }
 .mat-container {
   height: 100vh;
+  background-color: $best-doc-light-90;
+
+  .mat-sidenav-content {
+    .mat-toolbar {
+      background-color: $best-doc-darken-50;
+      .mat-toolbar-row {
+        #openSidebar {
+          color: $best-doc-white;
+        }
+        .icon-user {
+          color: $best-doc-light-75;
+          font-size: 1.8em;
+          vartical-align: middle;
+        }
+        h2{
+          color: $best-doc-white;
+          font-size: 1.5em;
+        }
+      }
+    }
+  }
 }
 
 .toolbar-middle-space {
@@ -36,4 +58,47 @@
   width: 320px;
   padding: 20px;
   background-color: black;
+  background-color: $best-doc-base-color;
+}
+
+.mat-sidenavLeft {
+  border-radius: $best-doc-rounded-top-bottom-right;
+  .navbar {
+    .navbar-nav {
+      display: block;
+      width: 100%;
+    }
+    li {
+      padding-left: 20px;
+      display: block;
+      &.selected {
+        background-color: $best-doc-white;
+        border-radius: $best-doc-rounded-top-bottom-right;
+        a {
+          color: $best-doc-base-color;
+        }
+      }
+      a {
+          color: $best-doc-white;
+      }
+      [class^="icon-"], [class^="icon."] {
+        &:before {
+          font-size: 2em;
+          margin-right: 10px;
+          vertical-align: middle;
+        }
+      }
+    }
+
+  }
+}
+
+.mat-sidenav {
+  background-color: $best-doc-base-color;
+  color: $best-doc-white;
+  padding-left: 0;
+  .nav-bar {
+    margin: 0;
+    padding: 0;
+  }
 }
