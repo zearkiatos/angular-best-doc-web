@@ -1,6 +1,22 @@
-#carousel-news {
-  display:flex;
-  flex-direction: row;
-  justify-content: center;
-  flex-wrap: wrap;
+@import '../../../styles//partials/colors';
+
+
+mat-accordion {
+  background-color: $best-doc-base-color;
+
+  mat-expansion-panel {
+    background-color: $best-doc-light-15;
+
+    mat-expansion-panel-header * {
+      color: $best-doc-white;
+      font-size: 1.3em;
+    }
+  }
+
+  #carousel-news {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
 }

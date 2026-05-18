@@ -64,6 +64,7 @@
 .mat-sidenavLeft {
   border-radius: $best-doc-rounded-top-bottom-right;
   .navbar {
+    height: 80vh;
     .navbar-nav {
       display: block;
       width: 100%;
@@ -71,8 +72,19 @@
     li {
       padding-left: 20px;
       display: block;
+      min-height: 48px;
+      margin-bottom: 20px;
       &.selected {
         background-color: $best-doc-white;
+        border-radius: $best-doc-rounded-top-bottom-right;
+        a {
+          color: $best-doc-base-color;
+        }
+      }
+      &.selected:hover,
+      &:hover {
+        background-color: $best-doc-light-85;
+        color: $best-doc-base-color;
         border-radius: $best-doc-rounded-top-bottom-right;
         a {
           color: $best-doc-base-color;
@@ -100,5 +112,8 @@
   .nav-bar {
     margin: 0;
     padding: 0;
+  }
+  #button-configuration {
+    color: $best-doc-white;
   }
 }

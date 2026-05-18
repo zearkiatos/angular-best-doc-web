@@ -52,6 +52,7 @@ $best-doc-darken-90: scale-color($best-doc-base-color, $lightness: -90%);
 $best-doc-dark-95: scale-color($best-doc-base-color, $lightness: -95%);
 
 $best-doc-gradient-dashboard: linear-gradient(to bottom, $best-doc-darken-50, $best-doc-base-color 60%);
+$best-doc-gradient-trafficlight: linear-gradient(to left, $best-doc-darken-60, $best-doc-light-20 100%);
 
 // Lightraffic Colors
 

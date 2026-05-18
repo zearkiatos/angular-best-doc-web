@@ -1,0 +1,63 @@
+@import '../../../styles/partials/colors';
+
+:host {
+  filter: drop-shadow(0px 0px 5px $best-doc-darken-90);
+  margin: 5px;
+
+  mat-card {
+    background: $best-doc-gradient-trafficlight;
+    border-radius: 10px;
+    color: $best-doc-white;
+
+    mat-card-header {
+      text-align: center;
+
+      mat-card-subtitle {
+        color: $best-doc-white;
+      }
+    }
+
+    mat-card-content {
+      text-align: center;
+      font-size: 3em;
+      padding: 0.5em 0;
+    }
+
+    mat-card-actions {
+      padding: 0px;
+      margin: 0px 0px -16px 0px;
+
+      button {
+        border: none;
+        background: none;
+        text-align: center;
+        width: 100%;
+        border-radius: 0px 0px 10px 10px;
+
+        mat-icon {
+          color: $best-doc-white;
+        }
+      }
+    }
+  }
+
+  &:nth-child(1) button {
+    background-color: $lighttraffic-green !important;
+  }
+
+  &:nth-child(2) button {
+    background-color: $lighttraffic-yellow !important;
+  }
+
+  &:nth-child(3) button {
+    background-color: $lighttraffic-red !important;
+  }
+
+  &:nth-child(4) button {
+    background-color: $lighttraffic-orange !important;
+  }
+
+  &:nth-child(5) button {
+    background-color: $lighttraffic-blue !important;
+  }
+}

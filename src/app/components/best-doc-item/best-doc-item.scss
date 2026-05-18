@@ -1,23 +1,32 @@
-.item-cell, .item-cell-first, .item-cell-last {
-  display: table-cell;
-  min-width: 180px;
-  min-height: 75px;
-  padding: 0px 10px 20px 10px;
-  label {
-    display: block;
-  }
-  span {
-    display: block;
+:host {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  .item-cell,
+  .item-cell-first,
+  .item-cell-last {
+    padding: 0px 10px 20px 10px;
+    flex-shrink: ;
+
+    label {
+      display: none;
+    }
+
+    span {
+      display: block;
+    }
   }
 }
 
 .icon {
   color: white;
   border-radius: 50%;
+
   &-active {
     @extend .icon;
     background-color: green;
   }
+
   &-inactive {
     @extend .icon;
     background-color: red;

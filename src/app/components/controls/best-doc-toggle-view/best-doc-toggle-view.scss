@@ -1,1 +1,26 @@
+@import '../../../../styles/partials/colors', '../../../../styles/partials/variables';
 
+mat-button-toggle-group {
+  background-color: $best-doc-light-90;
+  border: none;
+
+  mat-button-toggle {
+    &.mat-button-toggle-checked {
+      background-color: $best-doc-darken-30;
+      color: $best-doc-light-80;
+    }
+  }
+
+
+  mat-button-toggle:nth-child(1) {
+    border-radius: $best-doc-rounded-top-bottom-left;
+  }
+
+  mat-button-toggle:nth-child(2) {
+    border-radius: $best-doc-rounded-top-bottom-right;
+  }
+}
+
+.mat-pseudo-checkbox {
+  color: $best-doc-light-80 !important;
+}
