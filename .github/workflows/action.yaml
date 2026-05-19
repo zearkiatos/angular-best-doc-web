@@ -19,10 +19,13 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: Install dependencies
       run: |
+        PNPM_HOME=/pnpm
+        PATH="$PNPM_HOME:$PATH"
+        mkdir -p /pnpm
         corepack enable
         corepack prepare pnpm@9.15.1 --activate
-        pnpm install
-        pnpm add -g @angular/cli
+        pnpm install -g @angular/cli
+        pnpm install --frozen-lockfile
     - name: Public URL
       run: export PUBLIC_URL=https://zearkiatos.github.io/angular-best-doc-web/
     - name: Create .env
