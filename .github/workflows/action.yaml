@@ -21,7 +21,6 @@ jobs:
       run: |
         PNPM_HOME=/pnpm
         PATH="$PNPM_HOME:$PATH"
-        mkdir -p /pnpm
         corepack enable
         corepack prepare pnpm@9.15.1 --activate
         pnpm install -g @angular/cli
