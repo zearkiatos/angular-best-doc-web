@@ -1,6 +1,6 @@
 {
   "name": "angular-best-doc-web",
-  "version": "4.0.0",
+  "version": "5.0.0",
   "scripts": {
     "config": "ts-node set-env.ts",
     "ng": "ng",
