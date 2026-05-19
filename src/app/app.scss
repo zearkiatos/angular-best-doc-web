@@ -1,5 +1,53 @@
+@import '../styles/partials/colors', '../styles/partials/variables';
+#identity {
+  width: 200px;
+  height: 25px;
+  span {
+    background-image: url('../assets/images/logo.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+  }
+  strong {
+    background-image: url('../assets/images/logotype.png');
+    background-size: 85%;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 100px;
+    height: 25px;
+    text-indent: 100px;
+    margin-left: -5px;
+    overflow: hidden;
+    filter: brightness(200%)
+  }
+}
 .mat-container {
   height: 100vh;
+  background-color: $best-doc-light-90;
+
+  .mat-sidenav-content {
+    .mat-toolbar {
+      background-color: $best-doc-darken-50;
+      .mat-toolbar-row {
+        #openSidebar {
+          color: $best-doc-white;
+        }
+        .icon-user {
+          color: $best-doc-light-75;
+          font-size: 1.8em;
+          vartical-align: middle;
+        }
+        h2{
+          color: $best-doc-white;
+          font-size: 1.5em;
+        }
+      }
+    }
+  }
 }
 
 .toolbar-middle-space {
@@ -9,4 +57,63 @@
 .mat-sidenavLeft, .mat-sidenavRight {
   width: 320px;
   padding: 20px;
+  background-color: black;
+  background-color: $best-doc-base-color;
+}
+
+.mat-sidenavLeft {
+  border-radius: $best-doc-rounded-top-bottom-right;
+  .navbar {
+    height: 80vh;
+    .navbar-nav {
+      display: block;
+      width: 100%;
+    }
+    li {
+      padding-left: 20px;
+      display: block;
+      min-height: 48px;
+      margin-bottom: 20px;
+      &.selected {
+        background-color: $best-doc-white;
+        border-radius: $best-doc-rounded-top-bottom-right;
+        a {
+          color: $best-doc-base-color;
+        }
+      }
+      &.selected:hover,
+      &:hover {
+        background-color: $best-doc-light-85;
+        color: $best-doc-base-color;
+        border-radius: $best-doc-rounded-top-bottom-right;
+        a {
+          color: $best-doc-base-color;
+        }
+      }
+      a {
+          color: $best-doc-white;
+      }
+      [class^="icon-"], [class^="icon."] {
+        &:before {
+          font-size: 2em;
+          margin-right: 10px;
+          vertical-align: middle;
+        }
+      }
+    }
+
+  }
+}
+
+.mat-sidenav {
+  background-color: $best-doc-base-color;
+  color: $best-doc-white;
+  padding-left: 0;
+  .nav-bar {
+    margin: 0;
+    padding: 0;
+  }
+  #button-configuration {
+    color: $best-doc-white;
+  }
 }

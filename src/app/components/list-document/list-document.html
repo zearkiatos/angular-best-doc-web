@@ -1,0 +1,48 @@
+<div class="container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title> Documents List </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div>
+        <div *ngFor="let document of documents">
+          <div class="item-cell-first">
+            <label>Id: </label>
+            <span>{{ document.id }}</span>
+          </div>
+          <div class="item-cell">
+            <label>Field title: </label>
+            <span>{{ document.file }}</span>
+          </div>
+          <div class="item-cell">
+            <label>File name: </label>
+            <span>{{ document.fileName }}</span>
+          </div>
+          <div class="item-cell">
+            <label>Applicant: </label>
+            <span>{{ document.applicant }}</span>
+          </div>
+          <div class="item-cell">
+            <label>Department: </label>
+            <span>{{ document.department }}</span>
+          </div>
+          <div class="item-cell">
+            <label>Weight: </label>
+            <span>{{ document.weight }}</span>
+          </div>
+          <div class="item-cell">
+            <label>Owner: </label>
+            <span>
+              <a (click)="goOwner(document.owner)">{{ document.owner }}</a>
+            </span>
+          </div>
+
+          <div class="item-cell">
+            <label>Status: </label>
+            <mat-icon [class]="document.status ? 'icon-active icon-check' : 'icon-inactive icon-check'"></mat-icon>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

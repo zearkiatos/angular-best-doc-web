@@ -1,4 +1,4 @@
-<div *ngFor="let document of documents">
+<div class="grid-item" *ngFor="let document of documents">
   <div class="item-cell-first">
     <label>Id:</label>
     <span>{{document.id}}</span>
@@ -30,7 +30,7 @@
 
   <div class="item-cell">
     <label>Status:</label>
-    <mat-icon [class]="document.status ? 'icon-active' : 'icon-inactive'">check</mat-icon>
+    <mat-icon [class]="document.status ? 'icon-active icon-check' : 'icon-inactive icon-check'"></mat-icon>
   </div>
   <div class="item-cell-last">
     <label>Actions:</label>

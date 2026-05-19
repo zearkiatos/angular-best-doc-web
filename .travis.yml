@@ -1,0 +1,22 @@
+language: node_js
+
+node_js:
+  - "24"
+
+branches:
+  only:
+    - develop
+    - main
+    - master
+
+cache:
+  directories:
+    - "$HOME/.npm"
+
+install:
+  - npm install -g pnpm
+  - pnpm install
+
+script:
+  - pnpm run build
+  - docker build . -t=angular-best-doc-web:travis-build-$TRAVIS_BUILD_NUMBER

@@ -1,3 +1,5 @@
+import { BestDocInterfaceDocument } from "../../../../interfaces/best-doc-interface-document";
+
 export class DocumentDataResponse {
   constructor(
     public id: String,

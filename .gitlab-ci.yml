@@ -1,0 +1,109 @@
+image: node:24-alpine
+
+stages:
+  - build
+  - deploy
+
+variables:
+  NODE_ENV: production
+  CI: "true"
+  NG_CLI_ANALYTICS: "false"
+  LOG_LEVEL: info
+  ENABLE_CONSOLE_LOG: "false"
+  BASE_PATH: "/"
+
+# Instalar dependencias una sola vez
+install:dependencies:
+  stage: build
+  script:
+    - echo "Installing dependencies..."
+    - corepack enable
+    - corepack prepare pnpm@9.15.1 --activate
+    - pnpm install
+    - pnpm add -g @angular/cli
+    - echo "✓ Dependencies installed"
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - node_modules/
+  cache:
+    paths:
+      - node_modules/
+
+# Build de Angular en image node (no docker)
+build:angular:
+  stage: build
+  dependencies:
+    - install:dependencies
+  cache:
+    paths:
+      - node_modules/
+  script:
+    - set -e  # Detiene en primer error
+
+    - echo "=== 1. Creating .env file ==="
+    - touch .env
+    - echo "NODE_ENV=${NODE_ENV}" > .env
+    - echo "CI=${CI}" >> .env
+    - echo "NG_CLI_ANALYTICS=${NG_CLI_ANALYTICS}" >> .env
+    - echo "PORT=${PORT:-4200}" >> .env
+    - echo "ENABLE_CONSOLE_LOG=${ENABLE_CONSOLE_LOG}" >> .env
+    - echo "LOG_LEVEL=${LOG_LEVEL}" >> .env
+    - echo "BASE_PATH=${BASE_PATH}" >> .env
+    - echo "DOCUMENT_API_BASE_URL=${DOCUMENT_API_BASE_URL}" >> .env
+    - cat .env
+
+    - echo "=== 2. Running pnpm run config ==="
+    - pnpm run config || (echo "❌ pnpm run config failed!"; exit 1)
+
+    - echo "=== 3. Checking environment.prod.ts ==="
+    - ls -la src/environments/
+    - test -f src/environments/environment.prod.ts && echo "✓ environment.prod.ts generated" || (echo "❌ environment.prod.ts NOT generated!"; exit 1)
+
+    - echo "=== 4. Building Angular app (this may take a moment) ==="
+    - pnpm run build 2>&1 || (echo "❌ pnpm run build failed! Check output above"; exit 1)
+
+    - echo "=== 5. Verifying build output ==="
+    - echo "Contents of dist/:"
+    - find dist/ -type f -o -type d | head -30
+    - test -d dist/angular-best-doc-web/browser && echo "✓ Build successful!" || (echo "❌ Build output folder not found!"; exit 1)
+
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - dist/
+    when: always  # Guardar artifacts incluso si falla (para debugging)
+  only:
+    - merge_requests
+    - main
+    - develop
+
+# Deploy a GitLab Pages
+pages:
+  stage: deploy
+  image: node:24-alpine
+  dependencies:
+    - build:angular
+  script:
+    - set -e
+
+    - echo "=== Checking inherited artifacts ==="
+    - test -d dist/ && echo "✓ dist/ inherited from build:angular" || (echo "❌ dist/ not inherited!"; exit 1)
+    - ls -la dist/angular-best-doc-web/browser/
+
+    - echo "=== Deploying to GitLab Pages ==="
+    - mkdir -p public
+    - cp -r dist/angular-best-doc-web/browser/* public/
+    - cp public/index.html public/404.html
+    - echo "✓ Files copied to public/"
+    - ls -la public/ | head -10
+
+  artifacts:
+    paths:
+      - public
+  environment:
+    name: production
+    url: https://$CI_PROJECT_NAMESPACE.gitlab.io/$CI_PROJECT_NAME/
+  only:
+    - main
+    - develop

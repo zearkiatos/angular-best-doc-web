@@ -4,7 +4,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { AppLoggerService } from '../../core/logging/application/app-logger.service';
 import { GetDocumentsUseCases } from '../../core/document/application/GetDocumentsUseCases';
 import { DocumentDataResponse } from '../../core/document/application/dto/DocumentDataResponse';
-import { JsonDocumentDataRepository } from '../../core/document/infrastructure/databases/JsonDocumentDataRepository';
+import { JsonDocumentDataRepository } from '../../core/document/infrastructure/repository/JsonDocumentDataRepository';
+import { BestDocDocuments } from '../../services/best-doc-documents';
 @Component({
   selector: 'app-best-doc-item',
   imports: [CommonModule, MatIconModule],
@@ -15,6 +16,10 @@ import { JsonDocumentDataRepository } from '../../core/document/infrastructure/d
 export class BestDocItem implements OnInit {
   private logger = inject(AppLoggerService);
   private cdr = inject(ChangeDetectorRef);
+
+  constructor(private documentService: BestDocDocuments) {
+
+  }
   documents: DocumentDataResponse[] = [];
   ngOnInit(): void {
     this.logger.info('BestDocItem initialized 📊✅', {
@@ -22,10 +27,7 @@ export class BestDocItem implements OnInit {
       tags: ['best-doc-item', 'init'],
     });
 
-    const getDocumentsUseCases = new GetDocumentsUseCases(
-      new JsonDocumentDataRepository()
-    )
-    getDocumentsUseCases.getDocuments().then(docs => {
+    this.documentService.getDocuments().then(docs => {
       this.documents = docs;
       this.cdr.markForCheck();
       this.logger.info('Documents fetched successfully 📄✅', {
@@ -41,9 +43,4 @@ export class BestDocItem implements OnInit {
       });
     });
   }
-}
-
-enum Status {
-  Active = "Active",
-  Inactive = "Inactive"
 }

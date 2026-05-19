@@ -1,0 +1,118 @@
+image:
+  file: .gitpod.Dockerfile
+
+ports:
+  - port: 4200
+    name: "🚀 Angular Dev Server"
+    description: "Application running in http://localhost:4200"
+    onOpen: open-browser
+    visibility: public
+
+  - port: 3000
+    name: "📋 Nginx Preview"
+    description: "Preview de la app compilada"
+    onOpen: ignore
+    visibility: private
+
+env:
+  NODE_ENV: staging
+  CI: "true"
+  NG_CLI_ANALYTICS: "false"
+  LOG_LEVEL: "debug"
+  ENABLE_CONSOLE_LOG: "true"
+  BASE_PATH: "/"
+
+tasks:
+  - name: 📦 Install Dependencies
+    init: |
+      echo "=========================================="
+      echo "📦 Installing Node dependencies..."
+      echo "=========================================="
+
+      # pnpm install es mejor que pnpm install en CI/CD y Gitpod
+      # (respeta package-lock.json exactamente)
+      pnpm install
+
+      # Instalar Angular CLI globalmente
+      pnpm install -g @angular/cli
+
+      # Verificar instalación
+      echo ""
+      echo "✓ Node version: $(node -v)"
+      echo "✓ pnpm version: $(pnpm -v)"
+      echo "✓ Angular CLI version: $(ng version --minimal)"
+      echo "=========================================="
+      echo "✓ Dependencies installed successfully!"
+      echo "=========================================="
+
+  - name: ⚙️ Configure Environment
+    command: |
+      echo "=========================================="
+      echo "⚙️ Configuring environment variables..."
+      echo "=========================================="
+      touch .env
+      echo "NODE_ENV=${NODE_ENV}" > .env
+      echo "CI=${CI}" >> .env
+      echo "NG_CLI_ANALYTICS=${NG_CLI_ANALYTICS}" >> .env
+      echo "PORT=4200" >> .env
+      echo "ENABLE_CONSOLE_LOG=${ENABLE_CONSOLE_LOG}" >> .env
+      echo "LOG_LEVEL=${LOG_LEVEL}" >> .env
+      echo "BASE_PATH=${BASE_PATH}" >> .env
+      npm run config
+      echo ""
+      echo "✓ Environment configured"
+      if [ -f "src/environments/environment.prod.ts" ]; then
+        echo "✓ environment.prod.ts generated"
+      fi
+      echo "=========================================="
+  - name: 🔨 Build Angular App
+    command: pnpm run build
+    background: true
+
+  - name: 🚀 Start Dev Server
+    command: pnpm start
+    background: true
+
+vscode:
+  extensions:
+    - Angular.ng-template
+
+    - ms-vscode.vscode-typescript-next
+    - ms-vscode.vscode-typescript-vue-plugin
+
+    - esbenp.prettier-vscode
+    - dbaeumer.vscode-eslint
+
+    - ms-vscode.js-debug
+    - ms-vscode.js-debug-companion
+
+    - ms-vscode.makefile-tools
+    - eamodio.gitlens
+    - GitHub.copilot
+
+  settings:
+    # Prettier como default formatter
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+
+    # Formatear al guardar
+    "editor.formatOnSave": true
+
+    # ESLint auto-fix on save
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": "explicit"
+    }
+
+    # TypeScript
+    "typescript.tsdk": "node_modules/typescript/lib"
+    "typescript.enablePromptUseWorkspaceTsdk": true
+
+    # Terminal
+    "terminal.integrated.defaultProfile.linux": "bash"
+    "terminal.integrated.fontSize": 12
+
+    # Editor
+    "editor.tabSize": 2
+    "editor.insertSpaces": true
+    "files.trimTrailingWhitespace": true
+    "files.insertFinalNewline": true
+

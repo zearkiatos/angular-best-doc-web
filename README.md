@@ -1,11 +1,29 @@
 # Description
 This is an 🅰️ngular Web project to practice how to use it and learn about UI and UX design 🎨
 
+![Github](https://github.com/zearkiatos/angular-best-doc-web/actions/workflows/action.yaml/badge.svg)
+![GitlabCI](https://gitlab.com/caprilespe/angular-best-doc-web/badges/develop/pipeline.svg)
+![TravisCI](https://api.travis-ci.com/zearkiatos/angular-best-doc-web.svg?branch=develop)
+
 # Made with
 [![Angular](https://img.shields.io/badge/angular-c42d30?style=for-the-badge&logo=angular&logoColor=white&labelColor=000000)]()
 [![JavaScript](https://img.shields.io/badge/javascript-ead547?style=for-the-badge&logo=javascript&logoColor=white&labelColor=000000)]()
 [![TypeScript](https://img.shields.io/badge/TypeScript-2f72bc?style=for-the-badge&logo=typescript&logoColor=white&labelColor=000000)]()
 [![Node.js](https://img.shields.io/badge/node.js-76c339?style=for-the-badge&logo=node.js&logoColor=white&labelColor=000000)]()
+
+# Project link 🔗
+
+Github: [https://zearkiatos.github.io/angular-best-doc-web/](https://zearkiatos.github.io/angular-best-doc-web/)
+
+Gitlab 🦊: [https://angular-best-doc-web-dc9166.gitlab.io/](https://angular-best-doc-web-dc9166.gitlab.io/)
+
+𝒱ercel: [https://angular-best-doc-web.vercel.app/](https://angular-best-doc-web.vercel.app/)
+
+𝙉etlify: [https://angular-best-doc-web.netlify.app/](https://angular-best-doc-web.netlify.app/)
+
+Firebase 🔥: [https://angular-best-doc-web.web.app/](https://angular-best-doc-web.web.app/)
+
+ℝender 📄: [https://angular-best-doc-web.onrender.com/](https://angular-best-doc-web.onrender.com/)
 
 # AngularBestDocWeb
 

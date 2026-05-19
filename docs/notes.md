@@ -25,3 +25,33 @@ $ ng generate component [components name]
 
 $ ng generate component [Example components/[The name of your component]
 ```
+
+# Create a module
+
+```sh
+$ ng generate module [Module Name]
+```
+
+# Create a new component an link with a module
+
+```sh
+$ ng generate component [Component name] --module=[mODULE NAME]
+```
+
+# Create a project with routing
+
+```sh
+$ ng new [Project name] --routing
+```
+
+# Create interfaces
+
+```sh
+$ ng generate interface [Component name]
+```
+
+# Create services
+
+```sh
+$ ng generate service [Service name]
+```

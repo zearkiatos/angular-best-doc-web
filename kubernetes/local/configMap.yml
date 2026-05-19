@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: angular-best-doc-web-configmap
+data:
+  CI: "true"
+  NG_CLI_ANALYTICS: "false"
+  PORT: "80"
+  NODE_ENV: "local"
+  ENABLE_CONSOLE_LOG: "true"
+  LOG_LEVEL: "debug"
+  BASE_PATH: "/"
+  DOCUMENT_API_BASE_URL: https://nodejs-best-doc-json-server-api.onrender.com

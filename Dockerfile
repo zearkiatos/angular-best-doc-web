@@ -1,15 +1,18 @@
 FROM node:24-alpine AS builder
 
 WORKDIR /app
-COPY package.json package-lock.json ./
-RUN npm install -g npm@11.11.0
-RUN npm ci
-RUN npm install -g @angular/cli
+COPY package.json pnpm-lock.yaml ./
+ENV PNPM_HOME=/pnpm
+ENV PATH="/pnpm:$PATH"
+RUN mkdir -p /pnpm
+RUN corepack enable && corepack prepare pnpm@9.15.1 --activate
+RUN pnpm install -g @angular/cli
+RUN pnpm install --frozen-lockfile
 
 ENV PATH="./node_modules/.bin:$PATH"
 
 COPY . ./
-RUN npm run build
+RUN pnpm run build
 
 FROM nginx:1.30-alpine
 RUN addgroup -S appgroup -g 10001 && adduser -S -D -H -u 10001 -G appgroup appuser && \

@@ -1,22 +1,72 @@
 <mat-sidenav-container class="mat-container">
   <mat-sidenav #sideNavbar class="mat-sidenavLeft" mode="over">
-    <p>Sidenav left</p>
+    <h1 id="identity">
+      <a routerLink="/">
+        <span>&nbsp;</span>
+        <strong>BestDoc</strong>
+      </a>
+    </h1>
+    <nav class="navbar">
+      <ul class="navbar-nav">
+        <li class="navbar-item selected">
+          <a routerLink="/" class="nav-link">
+            <span class="icon-home">Home</span>
+          </a>
+        </li>
+        <li class="navbar-item">
+          <a routerLink="/documents" class="nav-link">
+            <span class="icon-file-pdf">Document List</span>
+          </a>
+        </li>
+        <li class="navbar-item">
+          <a routerLink="/documents/new" class="nav-link">
+            <span class="icon-upload">Upload Documents</span>
+          </a>
+        </li>
+        <li class="navbar-item">
+          <a routerLink="#" class="nav-link">
+            <span class="icon-home">Company</span>
+          </a>
+        </li>
+        <li class="navbar-item">
+          <a routerLink="#" class="nav-link">
+            <span class="icon-calendar">TRD</span>
+          </a>
+        </li>
+        <li class="navbar-item">
+          <a routerLink="#" class="nav-link">
+            <span class="icon-info">Window</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <button id="button-configuration" class="btn">
+        <span class="icon-gear"> Configuration</span>
+    </button>
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar>
       <mat-toolbar-row>
-        <button id="openMenu" class="btn btn-danger" (click)="sideNavbar.toggle()">Open</button>
-        <h2>Company's name</h2>
+        <button id="openMenu" class="navbar-toggler btn-info" (click)="sideNavbar.toggle()">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <h2>Walmart ☀️</h2>
         <span class="toolbar-middle-space"></span>
-        <button id="openSidebar" class="btn" (click)="drawerRight.toggle()">User</button>
+        <span id="openSidebar" class="btn" (click)="drawerRight.toggle()">
+          Pedro Capriles
+          <span class="icon-user">
+
+          </span>
+        </span>
       </mat-toolbar-row>
       <mat-toolbar-row>
-        <h2>{{title()}}</h2>
+        <h3>{{title()}}</h3>
       </mat-toolbar-row>
     </mat-toolbar>
-    <app-dashboard></app-dashboard>
+    <router-outlet></router-outlet>
   </mat-sidenav-content>
   <mat-sidenav #drawerRight class="mat-sidenavRight" position="end" mode="push">
     <p>Sidenav right</p>
   </mat-sidenav>
 </mat-sidenav-container>
+<app-best-doc-footer></app-best-doc-footer>

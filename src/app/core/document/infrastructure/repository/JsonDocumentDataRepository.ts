@@ -1,4 +1,4 @@
-import type { DocumentDataRepository } from '../../domain/DocumentDataRepository';
+import type { DocumentDataRepository } from '../../domain/repository/DocumentDataRepository';
 import { HttpStatusCode } from '@angular/common/http';
 import DocumentDataJson from '../../../../../data/mocks/documents.json';
 import { DocumentDataDb } from './mapper/DocumentDataDb';

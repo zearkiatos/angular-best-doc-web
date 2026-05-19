@@ -1,0 +1,73 @@
+$primary-color: #203075;
+$secondary-color: #ffff0c;
+
+$company-base-color: $primary-color;
+$best-doc-base-color: $company-base-color;
+
+$best-doc-white: scale-color($best-doc-base-color, $lightness: 100%);
+$best-doc-black: scale-color($best-doc-base-color, $lightness: -100%);
+
+// Lighten Shades Company Colors
+
+$best-doc-light-98: scale-color($best-doc-base-color, $lightness: 98%);
+$best-doc-light-95: scale-color($best-doc-base-color, $lightness: 95%);
+$best-doc-light-90: scale-color($best-doc-base-color, $lightness: 90%);
+$best-doc-light-85: scale-color($best-doc-base-color, $lightness: 85%);
+$best-doc-light-80: scale-color($best-doc-base-color, $lightness: 80%);
+$best-doc-light-75: scale-color($best-doc-base-color, $lightness: 75%);
+$best-doc-light-70: scale-color($best-doc-base-color, $lightness: 70%);
+$best-doc-light-65: scale-color($best-doc-base-color, $lightness: 65%);
+$best-doc-light-60: scale-color($best-doc-base-color, $lightness: 60%);
+$best-doc-light-55: scale-color($best-doc-base-color, $lightness: 55%);
+$best-doc-light-50: scale-color($best-doc-base-color, $lightness: 50%);
+$best-doc-light-45: scale-color($best-doc-base-color, $lightness: 45%);
+$best-doc-light-40: scale-color($best-doc-base-color, $lightness: 40%);
+$best-doc-light-35: scale-color($best-doc-base-color, $lightness: 35%);
+$best-doc-light-30: scale-color($best-doc-base-color, $lightness: 30%);
+$best-doc-light-25: scale-color($best-doc-base-color, $lightness: 25%);
+$best-doc-light-20: scale-color($best-doc-base-color, $lightness: 20%);
+$best-doc-light-15: scale-color($best-doc-base-color, $lightness: 15%);
+$best-doc-light-10: scale-color($best-doc-base-color, $lightness: 10%);
+$best-doc-light-5: scale-color($best-doc-base-color, $lightness: 5%);
+
+// Darken Shades Company Colors
+$best-doc-darken-5: scale-color($best-doc-base-color, $lightness: -5%);
+$best-doc-darken-10: scale-color($best-doc-base-color, $lightness: -10%);
+$best-doc-darken-15: scale-color($best-doc-base-color, $lightness: -15%);
+$best-doc-darken-20: scale-color($best-doc-base-color, $lightness: -20%);
+$best-doc-darken-25: scale-color($best-doc-base-color, $lightness: -25%);
+$best-doc-darken-30: scale-color($best-doc-base-color, $lightness: -30%);
+$best-doc-darken-35: scale-color($best-doc-base-color, $lightness: -35%);
+$best-doc-darken-40: scale-color($best-doc-base-color, $lightness: -40%);
+$best-doc-darken-45: scale-color($best-doc-base-color, $lightness: -45%);
+$best-doc-darken-50: scale-color($best-doc-base-color, $lightness: -50%);
+$best-doc-darken-55: scale-color($best-doc-base-color, $lightness: -55%);
+$best-doc-darken-60: scale-color($best-doc-base-color, $lightness: -60%);
+$best-doc-darken-65: scale-color($best-doc-base-color, $lightness: -65%);
+$best-doc-darken-70: scale-color($best-doc-base-color, $lightness: -70%);
+$best-doc-darken-75: scale-color($best-doc-base-color, $lightness: -75%);
+$best-doc-darken-80: scale-color($best-doc-base-color, $lightness: -80%);
+$best-doc-darken-85: scale-color($best-doc-base-color, $lightness: -85%);
+$best-doc-darken-90: scale-color($best-doc-base-color, $lightness: -90%);
+$best-doc-dark-95: scale-color($best-doc-base-color, $lightness: -95%);
+
+$best-doc-gradient-dashboard: linear-gradient(to bottom, $best-doc-darken-50, $best-doc-base-color 60%);
+$best-doc-gradient-trafficlight: linear-gradient(to left, $best-doc-darken-60, $best-doc-light-20 100%);
+
+// Lightraffic Colors
+
+$lighttraffic-green: #74D881;
+$lighttraffic-blue: #01abd6;
+$lighttraffic-purple: #6f01d6;
+$lighttraffic-yellow: #F8EE5d;
+$lighttraffic-orange: #ff8647;
+$lighttraffic-red: #f94444;
+
+
+// Gray Shades
+$gray-base: #444;
+$gray-darker: lighten($gray-base, 13.5%); // #222
+$gray-dark: lighten($gray-base, 20%); // #333
+$gray-light: lighten($gray-base, 66%); // #555
+$gray-lighter: lighten($gray-base, 93.5%); // #eee
+$gray-lighten: lighten($gray-base, 80%);

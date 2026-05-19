@@ -1,5 +1,4 @@
-import { DocumentData } from "../domain/model/DocumentData";
-import { DocumentDataRepository } from "../domain/DocumentDataRepository";
+import { DocumentDataRepository } from "../domain/repository/DocumentDataRepository";
 import { DocumentDataPort } from "./port/input/DocumentDataPort";
 import { DocumentDataResponse } from "./dto/DocumentDataResponse";
 import { documentDataListToResponseList } from "./mapper/DocumentDataMapper";
